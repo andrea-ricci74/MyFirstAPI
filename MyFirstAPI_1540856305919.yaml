@@ -1,0 +1,72 @@
+definitions:
+  BookSchema:
+    properties:
+      Book:
+        properties:
+          Author:
+            default: gino la pergola
+            type: string
+          Editor:
+            default: stocausen
+            type: string
+          Id:
+            default: 123
+            type: integer
+          Title:
+            default: sample title
+            type: string
+          Year:
+            default: 1999
+            type: integer
+        type: object
+    type: object
+info:
+  title: MyFirstAPI
+  version: 1.0.0
+  x-lastModified: Oct 29, 2018 16:33PM PST
+paths:
+  /book:
+    get:
+      operationId: getBook
+      parameters:
+      - description: the id of the requested book
+        format: ""
+        in: query
+        name: id
+        required: false
+        type: string
+      - description: the author of the book
+        format: ""
+        in: query
+        name: author
+        required: false
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/BookSchema'
+        "404":
+          description: Not found
+    post:
+      consumes:
+      - application/json
+      operationId: postBook
+      parameters:
+      - description: ""
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/BookSchema'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+        "201":
+          description: Created
+        "500":
+          description: Internal Server Error
+swagger: "2.0"
